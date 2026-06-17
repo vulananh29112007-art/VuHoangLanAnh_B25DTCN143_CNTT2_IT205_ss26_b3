@@ -60,11 +60,15 @@ def find_champion(champion_id):
 
 
 def display_champions():
-    print("\n--- DANH SÁCH QUÂN CỜ ---")
     for champion in champion_pool:
-        role = champion.__class__.__name__
-        extra = f"Armor: {champion.shield_bonus}" if isinstance(champion, Warrior) else f"AP: {champion.ability_power}"
-        print(f"{champion.champion_id} | {champion.name} | {role} | {extra} | {champion.get_combat_power():.0f}")
+        if isinstance(champion, Warrior):
+            role = "Warrior"
+            info = f"Armor: {champion.shield_bonus}"
+        else:
+            role = "Mage"
+            info = f"AP: {champion.ability_power}"
+
+        print(f"{champion.champion_id} | {champion.name} | {role} | HP: {champion.base_hp} | ATK: {champion.base_atk} | {info} | Power: {champion.get_combat_power()}")
 
 
 def add_champion():
